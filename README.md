@@ -1,6 +1,6 @@
 # POC: Internationalization (I18N)
 
-It demonstrate how to change define strings in multiple languages and update the UI based on the user preferred language.
+It demonstrate how to define strings in multiple languages and update the UI based on the user preferred language.
 
 ## How to run
 
