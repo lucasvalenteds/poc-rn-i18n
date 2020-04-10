@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import * as RNLocalize from 'react-native-localize';
 import I18n from 'i18n-js';
@@ -27,18 +27,6 @@ function setupInternationalization(): void {
 
 const App: React.FC = (): React.ReactElement => {
   setupInternationalization();
-
-  useEffect(() => {
-    const handleLocalizationChange = () => {
-      setupInternationalization();
-    };
-
-    RNLocalize.addEventListener('change', handleLocalizationChange);
-
-    return () => {
-      RNLocalize.removeEventListener('change', handleLocalizationChange);
-    };
-  }, []);
 
   return (
     <>
