@@ -36,7 +36,7 @@ export const Postcard: React.FC<PostcardProps> = (props) => {
   return (
     <>
       <View style={style.container}>
-        <Text style={style.title}>{props.title}</Text>
+        <Text style={style.title}>{I18N.translate('postcard-title')}</Text>
         <Text style={style.message}>
           {I18N.translate('postcard-message', {
             message: props.message,

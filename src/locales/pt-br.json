@@ -1,4 +1,5 @@
 {
+    "postcard-title": "Olá Mundo!",
     "postcard-message": "%{message}",
     "postcard-author": "Escrito em %{date} por %{name}"
 }
