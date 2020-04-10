@@ -1,38 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import * as RNLocalize from 'react-native-localize';
 import I18n from 'i18n-js';
 import { Postcard } from './Postcard';
+import { ControlPanel } from './ControlPanel';
 
-type LocaleSupported = 'en-US' | 'pt-BR';
+export enum LocaleSupported {
+  UnitedStates = 'en-US',
+  Brazil = 'pt-BR',
+}
 
-type LocalesSupported = { [locale in LocaleSupported]: object };
+export type LocalesSupported = { [locale in LocaleSupported]: object };
 
-const localesSupported: LocalesSupported = {
+export const localesSupported: LocalesSupported = {
   'en-US': require('./locales/en-us.json'),
   'pt-BR': require('./locales/pt-br.json'),
 };
 
-function setupInternationalization(): void {
-  I18n.translations = localesSupported;
-
-  const deviceLocales = RNLocalize.getLocales();
-
-  const currentDeviceLanguage = RNLocalize.findBestAvailableLanguage(
-    deviceLocales.map((locale) => locale.languageTag),
+const App: React.FC = (): React.ReactElement => {
+  const [currentLocale, setCurrentLanguage] = useState(
+    RNLocalize.findBestAvailableLanguage(
+      RNLocalize.getLocales().map((locale) => locale.languageTag),
+    ),
   );
 
-  I18n.locale = currentDeviceLanguage?.languageTag || 'en-US';
-}
-
-const App: React.FC = (): React.ReactElement => {
-  setupInternationalization();
+  I18n.translations = localesSupported;
+  I18n.locale = currentLocale?.languageTag || LocaleSupported.UnitedStates;
 
   return (
     <>
       <StatusBar />
       <SafeAreaView>
         <ScrollView>
+          <ControlPanel
+            onPress={(locale: LocaleSupported): void =>
+              setCurrentLanguage({
+                languageTag: locale,
+                isRTL: false,
+              })
+            }
+          />
           <Postcard
             title="Hello World!"
             message="Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -45,7 +52,7 @@ const App: React.FC = (): React.ReactElement => {
           more recently with desktop publishing software like Aldus PageMaker
           including versions of Lorem Ipsum."
             author={'John Smith'}
-            timestamp={new Date()}
+            timestamp={new Date(2020, 3, 10)}
           />
         </ScrollView>
       </SafeAreaView>

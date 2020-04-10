@@ -1,16 +1,44 @@
-import { ScrollView } from 'react-native';
 import React from 'react';
 import App from './App';
 
-import ReactRenderer, {
-  ReactTestRenderer,
-  ReactTestInstance,
-} from 'react-test-renderer';
+import ReactRenderer, { ReactTestRenderer } from 'react-test-renderer';
 
-test('It renders the text', () => {
+test('It renders the app in English', () => {
   const renderer: ReactTestRenderer = ReactRenderer.create(<App />);
 
-  const node: ReactTestInstance = renderer.root.findByType(ScrollView);
+  ReactRenderer.act(() => {
+    const button = renderer.root.findByProps({
+      testID: 'app-english',
+    });
 
-  expect(node).toBeDefined();
+    button.props.onPress();
+  });
+
+  const title = renderer.root.findByProps({ testID: 'postcard-title' });
+  const author = renderer.root.findByProps({ testID: 'postcard-author' });
+
+  expect(title.props.children).toStrictEqual('Hello World!');
+  expect(author.props.children).toContain(
+    'Written in 10/04/2020 by John Smith',
+  );
+});
+
+test('It renders the app in Portuguese', () => {
+  const renderer: ReactTestRenderer = ReactRenderer.create(<App />);
+
+  ReactRenderer.act(() => {
+    const button = renderer.root.findByProps({
+      testID: 'app-portuguese',
+    });
+
+    button.props.onPress();
+  });
+
+  const title = renderer.root.findByProps({ testID: 'postcard-title' });
+  const author = renderer.root.findByProps({ testID: 'postcard-author' });
+
+  expect(title.props.children).toStrictEqual('Olá Mundo!');
+  expect(author.props.children).toContain(
+    'Escrito em 10/04/2020 por John Smith',
+  );
 });
