@@ -15,9 +15,11 @@ test('It renders the app in English', () => {
   });
 
   const title = renderer.root.findByProps({ testID: 'postcard-title' });
+  const message = renderer.root.findByProps({ testID: 'postcard-title' });
   const author = renderer.root.findByProps({ testID: 'postcard-author' });
 
   expect(title.props.children).toStrictEqual('Hello World!');
+  expect(message.props.children).not.toStrictEqual('');
   expect(author.props.children).toContain(
     'Written in 10/04/2020 by John Smith',
   );
@@ -35,9 +37,11 @@ test('It renders the app in Portuguese', () => {
   });
 
   const title = renderer.root.findByProps({ testID: 'postcard-title' });
+  const message = renderer.root.findByProps({ testID: 'postcard-title' });
   const author = renderer.root.findByProps({ testID: 'postcard-author' });
 
   expect(title.props.children).toStrictEqual('Olá Mundo!');
+  expect(message.props.children).not.toStrictEqual('');
   expect(author.props.children).toContain(
     'Escrito em 10/04/2020 por John Smith',
   );
