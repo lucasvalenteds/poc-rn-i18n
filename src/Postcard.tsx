@@ -1,0 +1,54 @@
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import I18N from 'i18n-js';
+
+export interface PostcardProps {
+  title: string;
+  message: string;
+  author: string;
+  timestamp: Date;
+}
+
+export const Postcard: React.FC<PostcardProps> = (props) => {
+  const style = StyleSheet.create({
+    container: {
+      padding: 16,
+      backgroundColor: '#FAFAFA',
+      borderWidth: 1,
+      borderColor: '#222222',
+      borderRadius: 8,
+      margin: 16,
+    },
+    title: {
+      fontSize: 20,
+    },
+    message: {
+      fontSize: 14,
+      textAlign: 'justify',
+      marginTop: 16,
+    },
+    author: {
+      fontSize: 12,
+      fontWeight: 'bold',
+      marginTop: 16,
+    },
+  });
+  return (
+    <>
+      <View style={style.container}>
+        <Text style={style.title}>{props.title}</Text>
+        <Text style={style.message}>
+          {I18N.translate('postcard-message', {
+            message: props.message,
+          })}
+        </Text>
+        <Text style={style.author}>
+          {I18N.translate('postcard-author', {
+            name: props.author,
+            date: I18N.strftime(props.timestamp, '%d/%m/%Y'),
+          })}
+        </Text>
+      </View>
+    </>
+  );
+};
