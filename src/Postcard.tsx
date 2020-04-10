@@ -14,9 +14,6 @@ export const Postcard: React.FC<PostcardProps> = (props) => {
     container: {
       padding: 16,
       backgroundColor: '#FAFAFA',
-      borderWidth: 1,
-      borderColor: '#222222',
-      borderRadius: 8,
       margin: 16,
     },
     title: {
