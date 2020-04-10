@@ -33,16 +33,19 @@ export const Postcard: React.FC<PostcardProps> = (props) => {
       marginTop: 16,
     },
   });
+
   return (
     <>
       <View style={style.container}>
-        <Text style={style.title}>{I18N.translate('postcard-title')}</Text>
-        <Text style={style.message}>
+        <Text testID={'postcard-title'} style={style.title}>
+          {I18N.translate('postcard-title')}
+        </Text>
+        <Text testID={'postcard-message'} style={style.message}>
           {I18N.translate('postcard-message', {
             message: props.message,
           })}
         </Text>
-        <Text style={style.author}>
+        <Text testID={'postcard-author'} style={style.author}>
           {I18N.translate('postcard-author', {
             name: props.author,
             date: I18N.strftime(props.timestamp, '%d/%m/%Y'),
