@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, View, StyleSheet } from 'react-native';
 import { LocaleSupported } from './App';
+import I18n from 'i18n-js';
 
 export interface ControlPanelProps {
   onPress(locale: LocaleSupported): void;
@@ -23,12 +24,12 @@ export const ControlPanel: React.FC<ControlPanelProps> = (
       <View style={style.container}>
         <Button
           testID={'app-english'}
-          title={'English'}
+          title={I18n.translate('controlpanel-english')}
           onPress={(): void => props.onPress(LocaleSupported.UnitedStates)}
         />
         <Button
           testID={'app-portuguese'}
-          title={'Português'}
+          title={I18n.translate('controlpanel-portuguese')}
           onPress={(): void => props.onPress(LocaleSupported.Brazil)}
         />
       </View>
